@@ -1,6 +1,6 @@
 # RF PLL System Model
 
-**rf-pll-system-model** is a Python package for behavioural simulation of RF signal chains with integrated PLL phase noise modelling. It is designed to support end-to-end analysis of wireless communication systems at the complex baseband level, connecting device-level impairments — nonlinearity, noise figure, and phase noise — to system-level performance metrics such as EVM and BER.
+**rf-system-model** is a Python package for behavioural simulation of RF signal chains with integrated PLL phase noise modelling. It is designed to support end-to-end analysis of wireless communication systems at the complex baseband level, connecting device-level impairments — nonlinearity, noise figure, and phase noise — to system-level performance metrics such as EVM and BER.
 
 The package was developed as part of an R&D project (Kandidat, 2nd semester) investigating the impact of RF front-end and local oscillator impairments on OFDM-based communication systems.
 

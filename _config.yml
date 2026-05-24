@@ -9,7 +9,7 @@ html:
   use_repository_button: true
 
 repository:
-  url: https://github.com/PhillipRambo/rf-pll-system-model
+  url: https://github.com/PhillipRambo/rf-system-model
 
 latex:
   latex_documents:
