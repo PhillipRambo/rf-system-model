@@ -15,6 +15,7 @@ class PLLParams:
     Tu: float  # OFDM usefull length of symbol length, i.e length of FFT interval
     enable_ofdm_weighting: bool = False #flag to enable OFDM weighting function
     f_range_limits: tuple[float, float] = (10, 1e10) # offset frequencies to evaluate the Phase noise over
+    vco_noise_floor_dbc: float | None = None  # far-from-carrier VCO thermal floor; None = disabled
 
 class PLL:
     def __init__(self, params: PLLParams, rng):
@@ -22,6 +23,9 @@ class PLL:
         self._rng = rng
         self.alpha = 10**(float(self.p.VCO_Phase_Noise_dBc[0]) / 10) * (float(self.p.VCO_Phase_Noise_dBc[1]))**2
         self.SLF = 10**(self.p.SLF_dBc / 10)
+        self.VCO_floor = 10**(self.p.vco_noise_floor_dbc / 10) if self.p.vco_noise_floor_dbc is not None else 0.0
+        if self.p.enable_ofdm_weighting and not self.p.Tu:
+            raise ValueError("PLLParams: Tu must be set (> 0) when enable_ofdm_weighting=True")
 
     def get_psd(self, f: np.ndarray) -> np.ndarray:
         f_L = self.p.f_L
@@ -32,7 +36,7 @@ class PLL:
         lp_factor = 1 / (1 + (f_safe / f_L)**2)   # low-pass: reference noise
         hp_factor = (f_safe / f_L)**2 / (1 + (f_safe / f_L)**2)  # high-pass: VCO noise
         
-        S_phi = self.SLF * lp_factor + (self.alpha / f_safe**2) * hp_factor
+        S_phi = self.SLF * lp_factor + (self.alpha / f_safe**2) * hp_factor + self.VCO_floor
         
         if self.p.enable_ofdm_weighting:
             denom = (np.pi * f_safe * self.p.Tu)**2
@@ -70,8 +74,9 @@ class MixerParams:
     iip3_dbm: float
     nf_db: float
     temp_k: float = 290.0
+    iip2_dbm: float | None = None
     pll: PLLParams | None = None
-    mixer_ideal: bool = False 
+    mixer_ideal: bool = False
 
 class MixerBlock(Block):
     type_name = "mixer"
@@ -101,6 +106,10 @@ class MixerBlock(Block):
 
         beta = alpha_lin / (2.0 * dbm_to_w(p.iip3_dbm))
         y = alpha_lin * x - beta * (np.abs(x)**2) * x
+
+        if p.iip2_dbm is not None:
+            a2 = alpha_lin / np.sqrt(2.0 * dbm_to_w(p.iip2_dbm))
+            y += a2 * x**2
 
         # Noise stage
         F = db_to_linear(p.nf_db)

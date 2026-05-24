@@ -4,6 +4,8 @@ This chapter collects all verification and test notebooks. Each notebook is self
 
 All notebooks load their pipeline from a YAML configuration file in the same directory, keeping test parameters easy to inspect and modify without touching the notebook cells.
 
+The four system-performance notebooks under `verification/` (BER, EVM, Link Budget, and Signal Generation Demo) share a common setup helper, `verification/tx_setup.py`. Its `build_test_setup(...)` function generates the PRBS / QAM / OFDM payload, scales it to a target average input power, and instantiates the TX → channel → RX pipeline from `Tx_channel_Rx.yaml`. Start with the **Signal Generation Demo** notebook to see this end-to-end before reading the BER and EVM notebooks.
+
 ---
 
 ## Device Verification
@@ -126,14 +128,49 @@ Covers the generation of a complete baseband payload: PRBS bits → QAM symbols 
 
 ---
 
-### Performance Verification
+### Signal Generation Demo
 
-**Notebook:** `verification/Performance_Verification.ipynb`
+**Notebook:** `verification/Signal_Generation_Demo.ipynb`
 
-The top-level end-to-end system verification. The full signal chain — from payload generation through the RF front-end (LNA, Mixer with PLL, PA), through the channel (path loss, AWGN), to demodulation — is simulated and evaluated.
+Walks through how a complete OFDM baseband payload is built up step by step: PRBS-15 bit generation, Gray-coded 64-QAM mapping, OFDM modulation (active subcarriers, IFFT, cyclic prefix), and power scaling to a target input level. The notebook ends by loading the full TX → channel → RX pipeline from `Tx_channel_Rx.yaml`. This is the recommended entry point before reading the BER, EVM, or Link Budget notebooks — those four share the same setup, wrapped into `verification/tx_setup.py:build_test_setup()`.
 
-Key metrics computed:
-- **EVM (Error Vector Magnitude)** — measures the deviation of received constellation points from their ideal positions, combining all impairments
-- **BER (Bit Error Rate)** — measured from end-to-end bit errors after demapping
+---
 
-The notebook is the primary tool for assessing the overall impact of RF impairments on system performance and comparing against specification targets from the project report.
+### Link Budget Verification
+
+**Notebook:** `verification/Link_Budget.ipynb`
+
+Compares the analytical per-block power budget (gain, loss, and noise figure computed cascade-style from the YAML) against the simulated power at every tap of the RF pipeline. Includes a sweep over input power to expose where compression sets in.
+
+**Key checks:**
+- Tap-by-tap power matches the analytical budget within a few tenths of a dB in the linear regime
+- Cumulative noise figure grows according to Friis' formula
+- PA compression appears at the expected input power on the sweep
+
+---
+
+### EVM Verification
+
+**Notebook:** `verification/EVM.ipynb`
+
+Measures the RMS EVM at two reference planes (after the PA, and after the full chain) and produces two 2-D sweeps:
+
+1. **EVM vs PLL parameters** — VCO phase noise at 1 MHz offset × PLL loop bandwidth, with multiple phase-noise realisations averaged per grid point
+2. **EVM vs I/Q imbalance** — amplitude imbalance (dB) × phase imbalance (degrees) using the standard $y = K_1 x + K_2 x^*$ complex-baseband model
+
+A single-point I/Q imbalance cell at the end reports the EVM penalty for a user-chosen $(\varepsilon, \theta)$ pair against the balanced reference.
+
+---
+
+### BER Verification
+
+**Notebook:** `verification/BER.ipynb`
+
+End-to-end Bit Error Rate of the full chain, in four parts:
+
+1. Point BER at the nominal SNR, together with the receive-side SNR and Eb/N0
+2. BER vs Eb/N0 sweep, compared against the theoretical QAM-in-AWGN curve
+3. **Chip-input sensitivity sweep** — channel AWGN bypassed, so only the LNA + RX-mixer NF add noise. Measures true chip sensitivity, referenced to the LNA input plane.
+4. **Bench-test sensitivity** — TX chain bypassed, AWGN floor held fixed at $kTB$. Emulates a signal generator wired directly to the LNA, with the AWGN SNR recomputed at every sweep point to keep the noise power constant.
+
+This and the EVM notebook are the primary tools for assessing the overall impact of RF impairments on system performance and comparing against the specification targets in the project report.

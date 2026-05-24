@@ -31,6 +31,7 @@ def _build_pa(cfg: dict) -> PABlock:
         gain_db=float(p["gain_db"]),
         p1db_out_dbm=float(p["p1db_out_dbm"]),
         smoothness_p=float(p.get("smoothness_p", 2.0)),
+        enable_cubic=bool(p.get("enable_cubic", False)),
     )
     return PABlock(name=name, params=params)
 
@@ -44,6 +45,7 @@ def _build_mixer(cfg: dict) -> MixerBlock:
     pll_cfg = p.get("pll")
     pll_params = None
     if pll_cfg:
+        vco_floor_raw = pll_cfg.get("vco_noise_floor")
         pll_params = PLLParams(
             VCO_Phase_Noise_dBc=tuple(pll_cfg.get("VCO_PhaseNoise")),
             SLF_dBc=float(pll_cfg.get("LF_noise_floor")),
@@ -51,14 +53,14 @@ def _build_mixer(cfg: dict) -> MixerBlock:
             Tu=float(pll_cfg.get("Tu", 0.0)),  # must exist if weighting is used
             enable_ofdm_weighting=bool(pll_cfg.get("enable_ofdm_weighting", False)),
             f_range_limits=tuple(pll_cfg.get("Foffset_Range", (10, 1e10))),
+            vco_noise_floor_dbc=float(vco_floor_raw) if vco_floor_raw is not None else None,
         )
+    iip2_raw = p.get("iip2_dbm")
     params = MixerParams(
         gain_db=float(p["gain_db"]),
         iip3_dbm=float(p["iip3_dbm"]),
         nf_db=float(p["nf_db"]),
-        iq_amp_imb_db=float(p.get("iq_amp_imb_db", 0.0)),
-        iq_phase_imb_deg=float(p.get("iq_phase_imb_deg", 0.0)),
-        dc_offset_complex=complex(p.get("dc_offset_complex", 0j)),
+        iip2_dbm=float(iip2_raw) if iip2_raw is not None else None,
         pll=pll_params
     )
     

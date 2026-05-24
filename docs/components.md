@@ -108,25 +108,27 @@ The Mixer block combines a frequency conversion model with an integrated PLL pha
 |---|---|
 | `gain_db` | Conversion gain in dB |
 | `iip3_dbm` | Input-referred IIP3 in dBm |
+| `iip2_dbm` | Input-referred IIP2 in dBm (optional; `None` disables 2nd-order distortion) |
 | `nf_db` | Noise figure in dB |
 | `temp_k` | Physical temperature (default: 290 K) |
 | `pll` | `PLLParams` instance, or `None` to disable phase noise |
 | `mixer_ideal` | If `True`, bypasses all impairments (gain, NL, noise) — useful for isolating PLL effects |
 
-The nonlinearity and noise models are identical in structure to the LNA. When `pll` is configured, the block first multiplies the input signal by the PLL-generated LO phasor $e^{j\phi(t)}$, then applies gain, nonlinearity, and noise.
+The nonlinearity and noise models are identical in structure to the LNA, with an optional second-order term controlled by `iip2_dbm`. When `pll` is configured, the block first multiplies the input signal by the PLL-generated LO phasor $e^{j\phi(t)}$, then applies gain, nonlinearity, and noise.
 
 #### PLL Phase Noise Model
 
-**Parameters (`PLLParams`)**
+**Parameters (`PLLParams`)** — the column **YAML key** shows the name used in YAML configs (these differ from the Python attribute names in `PLLParams`).
 
-| Parameter | Description |
-|---|---|
-| `VCO_Phase_Noise_dBc` | Tuple `[dBc, f_offset]` specifying the VCO phase noise level at a reference offset |
-| `SLF_dBc` | Low-frequency noise floor in dBc/Hz |
-| `f_L` | PLL loop bandwidth in Hz |
-| `Tu` | OFDM useful symbol duration (for subcarrier weighting) |
-| `enable_ofdm_weighting` | Apply OFDM subcarrier weighting function (default: `False`) |
-| `f_range_limits` | Frequency range for PSD evaluation (default: 10 Hz to 10 GHz) |
+| Python attribute | YAML key | Description |
+|---|---|---|
+| `VCO_Phase_Noise_dBc` | `VCO_PhaseNoise` | Tuple `[dBc, f_offset]` specifying the VCO phase noise level at a reference offset |
+| `SLF_dBc` | `LF_noise_floor` | Low-frequency noise floor in dBc/Hz |
+| `f_L` | `loop_bandwidth` | PLL loop bandwidth in Hz |
+| `Tu` | `Tu` | OFDM useful symbol duration (required when subcarrier weighting is enabled) |
+| `enable_ofdm_weighting` | `enable_ofdm_weighting` | Apply OFDM subcarrier weighting function (default: `False`) |
+| `f_range_limits` | `Foffset_Range` | Frequency range for PSD evaluation (default: 10 Hz to 10 GHz) |
+| `vco_noise_floor_dbc` | `vco_noise_floor` | Far-from-carrier VCO thermal floor in dBc/Hz (optional; `None` disables it) |
 
 The phase noise PSD combines two regions shaped by the loop filter:
 
@@ -173,15 +175,21 @@ mixer = MixerBlock("mixer1", MixerParams(
 
 `rfmodel.channel.AWGN` — `AWGNBlock`, `AWGNParams`
 
-Adds complex Gaussian white noise to the signal at a specified signal-to-noise ratio.
+Adds complex Gaussian white noise to the signal in one of two selectable modes.
 
 **Parameters**
 
 | Parameter | Description |
 |---|---|
-| `snr_db` | Signal-to-noise ratio in dB |
+| `snr_db` | Signal-to-noise ratio in dB (used in SNR mode) |
+| `thermal_noise` | If `True`, switches to thermal mode and fixes the noise power at $kTB$, ignoring `snr_db` (default: `False`) |
+| `temp_k` | Physical noise temperature in K, used only in thermal mode (default: 290 K) |
 
-The noise power is computed from the **instantaneous signal power** of each input block: $P_n = P_s / \text{SNR}_\text{linear}$. Complex Gaussian noise is then drawn with $\sigma = \sqrt{P_n/2}$ per component. This means the SNR tracks the signal power — if you scale the signal before the AWGN block, the noise scales accordingly.
+**SNR mode** (`thermal_noise=False`, default) — the noise power is computed from the **instantaneous signal power** at the block input: $P_n = P_s / \text{SNR}_\text{linear}$. The SNR is invariant under signal scaling, which makes this mode the natural choice for BER-vs-SNR sweeps.
+
+**Thermal mode** (`thermal_noise=True`) — the noise power is fixed at the Johnson–Nyquist floor $P_n = kT \cdot f_s$ over the complex-baseband bandwidth. The noise is **independent of signal level**, so the SNR changes across an input-power sweep. This mode models a matched source/cable at temperature `temp_k` and is used by the bench-test sensitivity cell of the BER verification notebook.
+
+In both modes, complex Gaussian noise is drawn with $\sigma = \sqrt{P_n/2}$ per component.
 
 **What can be demonstrated**
 

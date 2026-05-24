@@ -20,10 +20,13 @@ def _build_channel(cfg: dict) -> ChannelBlock:
 def _build_awgn(cfg: dict) -> AWGNBlock:
     name = cfg["name"]
     seed = cfg.get("seed", None)
-    p = cfg.get("params", {})
+    p    = cfg.get("params", {})
 
-    params = AWGNParams(
-        snr_db=float(p["snr_db"]),
+    thermal = bool(p.get("thermal_noise", False))
+    params  = AWGNParams(
+        snr_db        = float(p.get("snr_db", 0.0)),
+        thermal_noise = thermal,
+        temp_k        = float(p.get("temp_k", 290.0)),
     )
     return AWGNBlock(name=name, params=params, seed=seed)
 

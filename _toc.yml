@@ -39,6 +39,15 @@ parts:
       - file: docs/examples/payload
         sections:
           - file: test_benches/System/Payload_Generation/payload
-      - file: docs/examples/performance
+      - file: docs/examples/signal_generation
         sections:
-          - file: verification/Performance_Verification
+          - file: verification/Signal_Generation_Demo
+      - file: docs/examples/link_budget
+        sections:
+          - file: verification/Link_Budget
+      - file: docs/examples/evm
+        sections:
+          - file: verification/EVM
+      - file: docs/examples/ber
+        sections:
+          - file: verification/BER

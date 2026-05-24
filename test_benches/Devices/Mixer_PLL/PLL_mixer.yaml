@@ -3,11 +3,13 @@ pipeline:
     name: mixer_and_pll
     seed: 1
     params:
-      gain_db: 0
+      gain_db: 10
       iip3_dbm: 30
+      iip2_dbm: 45.0
       nf_db: 5
 
       pll:
         VCO_PhaseNoise: [-90, 1e6]   # [dBc, f_offset]
         LF_noise_floor: -140
         loop_bandwidth: 10e3
+        vco_noise_floor: -160      # dBc/Hz — flat floor at high offsets

@@ -3,52 +3,57 @@ pipeline:
     name: mixer_and_pll_TX
     seed: 1
     params:
-      gain_db: 0
-      iip3_dbm: 30
-      nf_db: 5
-
+      gain_db: 0           
+      iip3_dbm: 20          
+      iip2_dbm: 60.0       
+      nf_db: 5             
       pll:
-        VCO_PhaseNoise: [-115, 1e6]   # [dBc, f_offset]
-        LF_noise_floor: -140
-        loop_bandwidth: 30e3
+        VCO_PhaseNoise: [-115, 1e6]   
+        LF_noise_floor: -140          
+        loop_bandwidth: 100e3         
+      
 
   - type: pa
     name: PA_TX
     params:
-      gain_db: 20.0        
-      p1db_out_dbm: 6.0    
-      smoothness_p: 2.0
+      gain_db: 20.0         
+      p1db_out_dbm: 5.0     
+      enable_cubic: True     
+
 
   - type: pathloss
     name: PathLoss
     params:
-      freq_hz: 5e9
-      distance_m: 2.0      
-      tx_ant_gain_db: 2.15     
-      rx_ant_gain_db: 2.15      
+      freq_hz: 5e9         
+      distance_m: 2.0       
+      tx_ant_gain_db: 2.15  
+      rx_ant_gain_db: 2.15  
 
   - type: awgn
     name: AWGN
     seed: 123
     params:
-      snr_db: 25.0         
+      thermal_noise: true        
+
 
   - type: lna
     name: LNA
     seed: 1
     params:
-      gain_db: 20.0         
-      nf_db: 1.5            
-      IP3_dbm: 13.0       
+      gain_db: 18.0        
+      nf_db: 3.0            
+      IP3_dbm: -4.0        
+
+
   - type: mixer
     name: mixer_and_pll_RX
     seed: 1
     params:
-      gain_db: 0
-      iip3_dbm: 30
-      nf_db: 5
-
+      gain_db: 10           
+      iip3_dbm: 35           
+      iip2_dbm: 60.0        
+      nf_db: 12        
       pll:
         VCO_PhaseNoise: [-115, 1e6]   
-        LF_noise_floor: -140
-        loop_bandwidth: 30e3  
+        LF_noise_floor: -140          
+        loop_bandwidth: 500e3        
