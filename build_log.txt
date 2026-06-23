@@ -1,0 +1,140 @@
+﻿Running Jupyter-Book v0.15.1
+Source Folder: C:\Users\phill\OneDrive\Skole\Kandidat\2.Semester\R&D Project\Python\rf-pll-system-model
+Config Path: C:\Users\phill\OneDrive\Skole\Kandidat\2.Semester\R&D Project\Python\rf-pll-system-model\_config.yml
+Output Path: C:\Users\phill\OneDrive\Skole\Kandidat\2.Semester\R&D Project\Python\rf-pll-system-model\_build\html
+[01mRunning Sphinx v5.0.2[39;49;00m
+jupyter-book : C:\Users\phill\AppData\Local\Programs\Python\Python313\Scripts\jupyter-book.exe\__main__.py:6: DeprecationWarning: Parsing dates involving a day of month without a year specified is ambiguious
+At line:1 char:8
++ $out = jupyter-book build . *>&1 | Out-String; $out | Set-Content -Pa ...
++        ~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (C:\Users\phill\...d is ambiguious:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+and fails to parse leap day. The default behavior will change in Python 3.15
+to either always raise an exception or to use a different default year (TBD).
+To avoid trouble, add a specific year to the input & format.
+See https://github.com/python/cpython/issues/70647.
+[etoc] Changing master_doc to 'intro'
+[01mloading pickled environment... [39;49;00mdone
+[01mmyst v0.18.1:[39;49;00m MdParserConfig(commonmark_only=False, gfm_only=False, enable_extensions=['colon_fence', 'dollarmath', 'linkify', 'substitution', 'tasklist'], disable_syntax=[], all_links_external=False, url_schemes=['mailto', 'http', 'https'], ref_domains=None, highlight_code_blocks=True, number_code_blocks=[], title_to_header=False, heading_anchors=None, heading_slug_func=None, footnote_transition=True, words_per_minute=200, sub_delimiters=('{', '}'), linkify_fuzzy_links=True, dmath_allow_labels=True, dmath_allow_space=True, dmath_allow_digits=True, dmath_double_inline=False, update_mathjax=True, mathjax_classes='tex2jax_process|mathjax_process|math|output_area')
+[01mmyst-nb v0.17.2:[39;49;00m NbParserConfig(custom_formats={}, metadata_key='mystnb', cell_metadata_key='mystnb', kernel_rgx_aliases={}, execution_mode='off', execution_cache_path='', execution_excludepatterns=[], execution_timeout=30, execution_in_temp=False, execution_allow_errors=False, execution_raise_on_error=False, execution_show_tb=False, merge_streams=False, render_plugin='default', remove_code_source=False, remove_code_outputs=False, code_prompt_show='Show code cell {type}', code_prompt_hide='Hide code cell {type}', number_source_lines=False, output_stderr='show', render_text_lexer='myst-ansi', render_error_lexer='ipythontb', render_image_options={}, render_figure_options={}, render_markdown_format='commonmark', output_folder='build', append_css=True, metadata_to_fm=False)
+Using jupyter-cache at: C:\Users\phill\OneDrive\Skole\Kandidat\2.Semester\R&D Project\Python\rf-pll-system-model\_build\.jupyter_cache
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mbuilding [html]: [39;49;00mtargets for 23 source files that are out of date
+[01mupdating environment: [39;49;00m8 added, 23 changed, 2 removed
+[01mreading sources... [39;49;00m[  4%] [35mREADME[39;49;00m                                               
+[01mreading sources... [39;49;00m[  8%] [35mdocs/components[39;49;00m                                      
+[01mreading sources... [39;49;00m[ 13%] [35mdocs/examples/ber[39;49;00m                                    
+[01mreading sources... [39;49;00m[ 17%] [35mdocs/examples/channel_modelling[39;49;00m                      
+[01mreading sources... [39;49;00m[ 21%] [35mdocs/examples/evm[39;49;00m                                    
+[01mreading sources... [39;49;00m[ 26%] [35mdocs/examples/link_budget[39;49;00m                            
+[01mreading sources... [39;49;00m[ 30%] [35mdocs/examples/mixer_verification[39;49;00m                     
+[01mreading sources... [39;49;00m[ 34%] [35mdocs/examples/pll_verification[39;49;00m                       
+[01mreading sources... [39;49;00m[ 39%] [35mdocs/examples/signal_generation[39;49;00m                      
+[01mreading sources... [39;49;00m[ 43%] [35mdocs/examples_intro[39;49;00m                                  
+[01mreading sources... [39;49;00m[ 47%] [35mintro[39;49;00m                                                
+[01mreading sources... [39;49;00m[ 52%] [35mtest_benches/Devices/LNA/LNA_Verification_Non_linear[39;49;00m 
+[01mreading sources... [39;49;00m[ 56%] [35mtest_benches/Devices/LNA/LNA_Verification_noise[39;49;00m      
+[01mreading sources... [39;49;00m[ 60%] [35mtest_benches/Devices/Mixer_PLL/Mixer_Verification[39;49;00m    
+[01mreading sources... [39;49;00m[ 65%] [35mtest_benches/Devices/Mixer_PLL/PLL_Verification[39;49;00m      
+[01mreading sources... [39;49;00m[ 69%] [35mtest_benches/Devices/PA/PA_test[39;49;00m                      
+[01mreading sources... [39;49;00m[ 73%] [35mtest_benches/System/Channel/Channel_modelling[39;49;00m        
+[01mreading sources... [39;49;00m[ 78%] [35mtest_benches/System/OFDM_QAM/OFDM_QAM_test[39;49;00m           
+[01mreading sources... [39;49;00m[ 82%] [35mtest_benches/System/Payload_Generation/payload[39;49;00m       
+[01mreading sources... [39;49;00m[ 86%] [35mverification/BER[39;49;00m                                     
+[01mreading sources... [39;49;00m[ 91%] [35mverification/EVM[39;49;00m                                     
+[01mreading sources... [39;49;00m[ 95%] [35mverification/Link_Budget[39;49;00m                             
+[01mreading sources... [39;49;00m[100%] [35mverification/Signal_Generation_Demo[39;49;00m                  
+
+[91mC:\Users\phill\OneDrive\Skole\Kandidat\2.Semester\R&D Project\Python\rf-pll-system-model\test_benches\System\OFDM_QAM\OFDM_QAM_test.ipynb:30002: WARNING: image file not readable: test_benches/System/OFDM_QAM/attachment:%7BB1CA748D-F7CA-4BC5-ACC9-2CDFE392A1FA%7D.png[39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[91mC:\Users\phill\OneDrive\Skole\Kandidat\2.Semester\R&D Project\Python\rf-pll-system-model\README.md: WARNING: document isn't included in any toctree[39;49;00m
+[91mC:\Users\phill\OneDrive\Skole\Kandidat\2.Semester\R&D Project\Python\rf-pll-system-model\docs\examples_intro.md: WARNING: document isn't included in any toctree[39;49;00m
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mwriting output... [39;49;00m[  3%] [32mREADME[39;49;00m                                                
+[01mwriting output... [39;49;00m[  6%] [32mdocs/components[39;49;00m                                       
+[01mwriting output... [39;49;00m[ 10%] [32mdocs/core_framework[39;49;00m                                   
+[01mwriting output... [39;49;00m[ 13%] [32mdocs/examples/ber[39;49;00m                                     
+[01mwriting output... [39;49;00m[ 17%] [32mdocs/examples/channel_modelling[39;49;00m                       
+[01mwriting output... [39;49;00m[ 20%] [32mdocs/examples/evm[39;49;00m                                     
+[01mwriting output... [39;49;00m[ 24%] [32mdocs/examples/link_budget[39;49;00m                             
+[01mwriting output... [39;49;00m[ 27%] [32mdocs/examples/lna_noise[39;49;00m                               
+[01mwriting output... [39;49;00m[ 31%] [32mdocs/examples/lna_nonlinear[39;49;00m                           
+[01mwriting output... [39;49;00m[ 34%] [32mdocs/examples/mixer_verification[39;49;00m                      
+[01mwriting output... [39;49;00m[ 37%] [32mdocs/examples/ofdm_qam[39;49;00m                                
+[01mwriting output... [39;49;00m[ 41%] [32mdocs/examples/pa_test[39;49;00m                                 
+[01mwriting output... [39;49;00m[ 44%] [32mdocs/examples/payload[39;49;00m                                 
+[01mwriting output... [39;49;00m[ 48%] [32mdocs/examples/pll_verification[39;49;00m                        
+[01mwriting output... [39;49;00m[ 51%] [32mdocs/examples/signal_generation[39;49;00m                       
+[01mwriting output... [39;49;00m[ 55%] [32mdocs/examples_intro[39;49;00m                                   
+[01mwriting output... [39;49;00m[ 58%] [32mintro[39;49;00m                                                 
+[01mwriting output... [39;49;00m[ 62%] [32mtest_benches/Devices/LNA/LNA_Verification_Non_linear[39;49;00m  
+[01mwriting output... [39;49;00m[ 65%] [32mtest_benches/Devices/LNA/LNA_Verification_noise[39;49;00m       
+[01mwriting output... [39;49;00m[ 68%] [32mtest_benches/Devices/Mixer_PLL/Mixer_Verification[39;49;00m     
+[01mwriting output... [39;49;00m[ 72%] [32mtest_benches/Devices/Mixer_PLL/PLL_Verification[39;49;00m       
+[01mwriting output... [39;49;00m[ 75%] [32mtest_benches/Devices/PA/PA_test[39;49;00m                       
+[01mwriting output... [39;49;00m[ 79%] [32mtest_benches/System/Channel/Channel_modelling[39;49;00m         
+[01mwriting output... [39;49;00m[ 82%] [32mtest_benches/System/OFDM_QAM/OFDM_QAM_test[39;49;00m            
+[01mwriting output... [39;49;00m[ 86%] [32mtest_benches/System/Payload_Generation/payload[39;49;00m        
+[01mwriting output... [39;49;00m[ 89%] [32mverification/BER[39;49;00m                                      
+[01mwriting output... [39;49;00m[ 93%] [32mverification/EVM[39;49;00m                                      
+[01mwriting output... [39;49;00m[ 96%] [32mverification/Link_Budget[39;49;00m                              
+[01mwriting output... [39;49;00m[100%] [32mverification/Signal_Generation_Demo[39;49;00m                   
+
+[01mgenerating indices... [39;49;00mgenindex done
+[01mwriting additional pages... [39;49;00msearch done
+[01mcopying images... [39;49;00m[  3%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/dfbd688c4c13fd03e30e9590674c65b923605ca971db6966ceba61684b3f907f.png[39;49;00m
+[01mcopying images... [39;49;00m[  6%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/4931aab1c9ee9d20d5b1d7ff07393b789b6cfa04145c81cd7a573f32e1237136.png[39;49;00m
+[01mcopying images... [39;49;00m[  9%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/19bdfc902783bf983542f5ce26bfbfdc45629bd3c19982978c6177f4b85a0fc6.png[39;49;00m
+[01mcopying images... [39;49;00m[ 12%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/2c150011e929f91a70cf361d51e33a50744870f79f88e67fd1925170018f4fdf.png[39;49;00m
+[01mcopying images... [39;49;00m[ 16%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/eb1f27c539be49f713b5503e4e82f543fea62538c6f274f7b0ff83f4adacde01.png[39;49;00m
+[01mcopying images... [39;49;00m[ 19%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/5ebe0004daf3bab047d26f0aa25164663d7b3b1f1d6ecba445b52b58077eb47a.png[39;49;00m
+[01mcopying images... [39;49;00m[ 22%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/c8466898a2218c50e33e75d8de17564ee3242bdaa10db3a3428afec12a291c54.png[39;49;00m
+[01mcopying images... [39;49;00m[ 25%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/b87f69cbd183eeb55af72a434ccf1ccbacd35da5b5b8339cbe392d4f9d4d6588.png[39;49;00m
+[01mcopying images... [39;49;00m[ 29%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/a147d30bd95c3fa2093cb7101de788102f2163ace74397b3d406bd5a4e96ebbc.png[39;49;00m
+[01mcopying images... [39;49;00m[ 32%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/e33edff1c361a49340cae000e922f0f83dca0db639cfbd000d22fb5fa92c3d77.png[39;49;00m
+[01mcopying images... [39;49;00m[ 35%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/772151fd995b50bf12811b6038a2bb966dcf630f769d126eb27b4c27b95fd8c8.png[39;49;00m
+[01mcopying images... [39;49;00m[ 38%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/ac188d861c25eabe9865460d4b75577d02b255860c68c24a5fe0ed1c4db36922.png[39;49;00m
+[01mcopying images... [39;49;00m[ 41%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/d11e08dfc9c65513d7b8414cf0e47957ab5926ccaecc6984f9e5a8f8c8dccf09.png[39;49;00m
+[01mcopying images... [39;49;00m[ 45%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/53399e913e5a90cbd77a8a5bdb5e2f920e2c13bf0c2e94661dbbf196f7c1d413.png[39;49;00m
+[01mcopying images... [39;49;00m[ 48%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/a9c5f5f981f5fafa31c1efa8d20c465553af3453f986232002df4ee1f3b2d54a.png[39;49;00m
+[01mcopying images... [39;49;00m[ 51%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/c9941f6b6e828b5ea9f943af0aafa7e59c5929514aeb1f9a02452b9346cbf70b.png[39;49;00m
+[01mcopying images... [39;49;00m[ 54%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/d37d041e0c81af04bc91bee9527b23f2bb32957dec4addcd2030170195075948.png[39;49;00m
+[01mcopying images... [39;49;00m[ 58%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/167a019689fb3eea41572e146c75749ad93e4b1576cb3168a3d90d7ad91b6380.png[39;49;00m
+[01mcopying images... [39;49;00m[ 61%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/ec7aefa6a88a48977312272ae0c9824731ece6a975a081c0d473be28760f73c4.png[39;49;00m
+[01mcopying images... [39;49;00m[ 64%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/32902952705f23d36a59af1deb09b1a44b3a9b21607b3a340adec491eec817b9.png[39;49;00m
+[01mcopying images... [39;49;00m[ 67%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/2aeb944c19ca76879b50eeccfa10771b52e659b40942e0f251e78315189b81f7.png[39;49;00m
+[01mcopying images... [39;49;00m[ 70%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/1513f83275bf26edd4002362a227c843c8f129bb656204d2949dc2d3e85ee115.png[39;49;00m
+[01mcopying images... [39;49;00m[ 74%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/4d393188af3cf92571ea0277fe18fc2617cae1c350483400535fb4c1176926a0.png[39;49;00m
+[01mcopying images... [39;49;00m[ 77%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/7601e9fff6dcfc90b0d63580f6122b33fb080c826bbed1c282df32608aede9b3.png[39;49;00m
+[01mcopying images... [39;49;00m[ 80%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/d74819112f420f42bb0c75324bc49a16dda5a18ccc88c94e86194a9f12239284.png[39;49;00m
+[01mcopying images... [39;49;00m[ 83%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/589c3032483b5aa37d8a8fd6c2ecff3b5487c80beacf60434a12eb7758d0897b.png[39;49;00m
+[01mcopying images... [39;49;00m[ 87%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/708f1f1508091ddc2218671bd0ab634bd70243c919f555a33e1962dd7cbe1609.png[39;49;00m
+[01mcopying images... [39;49;00m[ 90%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/bc0de67dec3e19bf5bde8aa72ce1c7abf7c7ea67d12c8a7d5f723101f14aa224.png[39;49;00m
+[01mcopying images... [39;49;00m[ 93%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/860d8df149b0fc4d9c1d4222ff7502b8a1935e268e3150d4f5ddd2c7d648534c.png[39;49;00m
+[01mcopying images... [39;49;00m[ 96%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/52ed05c74db35d81444fbc0c23c24ad793895ecf3085e0e97d62ff891c9a668b.png[39;49;00m
+[01mcopying images... [39;49;00m[100%] [33mC:/Users/phill/OneDrive/Skole/Kandidat/2.Semester/R&D Project/Python/rf-pll-system-model/_build/jupyter_execute/39ea0159d6f21595ff4a2d48589495a82ef101b4bbdf82b6658032f944d48b46.png[39;49;00m
+
+[01mcopying static files... [39;49;00mdone
+[01mcopying extra files... [39;49;00mdone
+[01mdumping search index in English (code: en)... [39;49;00mdone
+[01mdumping object inventory... [39;49;00mdone
+[01mbuild succeeded, 3 warnings.[39;49;00m
+
+The HTML pages are in _build\html.
+
+[92m===============================================================================[0m
+
+Finished generating HTML for book.
+Your book's HTML pages are here:
+    _build\html\
+You can look at your book by opening this file in a browser:
+    _build\html\index.html
+Or paste this line directly into your browser bar:
+    file://C:\Users\phill\OneDrive\Skole\Kandidat\2.Semester\R&D Project\Python\rf-pll-system-model\_build\html\index.html            
+
+[92m===============================================================================[0m
+
+

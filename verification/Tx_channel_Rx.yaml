@@ -33,7 +33,7 @@ pipeline:
     name: AWGN
     seed: 123
     params:
-      thermal_noise: true        
+      snr_db: 25   
 
 
   - type: lna
@@ -56,4 +56,4 @@ pipeline:
       pll:
         VCO_PhaseNoise: [-115, 1e6]   
         LF_noise_floor: -140          
-        loop_bandwidth: 500e3        
+        loop_bandwidth: 100e3        
